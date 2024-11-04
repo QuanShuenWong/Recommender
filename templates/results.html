@@ -1,10 +1,27 @@
+<!-- results.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Your Recommended Restaurants</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-$END$
+    <div class="container">
+        <!-- Page Title -->
+        <h1>Your Recommended Restaurants</h1>
+
+        <!-- Recommendations List -->
+        <ul class="recommendations-list">
+            {% for restaurant in recommendations %}
+                <li>{{ restaurant[0] }}, Predicted Rating: {{ restaurant[1] | round(1) }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Return Home Button -->
+        <form action="/" method="get">
+            <button type="submit">Go Back</button>
+        </form>
+    </div>
 </body>
 </html>

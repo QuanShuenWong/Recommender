@@ -1,17 +1,18 @@
-from surprise import Dataset, SVD, Reader
-from surprise.model_selection import cross_validate
+from surprise import Dataset, SVD, Reader, accuracy
+from surprise.model_selection import train_test_split
 import os
+import pickle
 
-# path to dataset file
+# path to dataset file, read and load data
 file_path = os.path.expanduser("/Users/quanshuen/PycharmProjects/Recommender/Data/yelp_dataset/yelp_academic_dataset_testData.csv")
 
 reader = Reader(line_format="user item rating", sep="\t")
 
-# Load the movielens-100k dataset (download it if needed),
 data = Dataset.load_from_file(file_path, reader=reader)
-
-# We'll use the famous SVD algorithm.
+# training the algorithm
+trainset = data.build_full_trainset()
 algo = SVD()
+algo.fit(trainset)
 
-# Run 5-fold cross-validation and print results
-cross_validate(algo, data, measures=["RMSE", "MAE"], cv=5, verbose=True)
+with open("model.pkl", "wb") as f:
+    pickle.dump(algo, f)

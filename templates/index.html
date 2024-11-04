@@ -1,10 +1,19 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Your Recommended Restaurants</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-$END$
+    <div class="container">
+        <h1>Your Recommended Restaurants</h1>
+        <form method="post" action="/">
+            <label for="user_id">Please Enter Your User ID for Recommendations:</label>
+            <input type="text" id="user_id" name="user_id" required placeholder="Enter User ID">
+            <button type="submit">Get Recommendations</button>
+        </form>
+    </div>
 </body>
 </html>
